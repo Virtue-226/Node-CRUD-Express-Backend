@@ -7,11 +7,15 @@ dotenv.config()
   //details from the env
 const username = process.env.username
 const password = process.env.password
-const dbName = 'Post'
+// console.log(process.env.username, "username");
+// console.log(password, "password")
 
-//connection string to mongo atlas
+const dbName = 'Node-API'
 
-const connectionString = `mongodb+srv://${username}:${password}@cluster0.tjh8e.mongodb.net/${dbName}?retryWrites=true&w=majority`
+//connection string to mongo atlas ${username}:${password}
+// mongodb+srv://admin:<password>@nodeapi.gzw1rta.mongodb.net/?retryWrites=true&w=majority
+// mongodb+srv://admin:virtue226@nodeapi.gzw1rta.mongodb.net/Node-API?retryWrites=true&w=majority
+const connectionString = `mongodb+srv://${username}:${password}@nodeapi.gzw1rta.mongodb.net/${dbName}?retryWrites=true&w=majority`
 
 const options = {
     autoIndex: false, // Don't build indexes
@@ -21,6 +25,8 @@ const options = {
     family: 4 // Use IPv4, skip trying IPv6
   };
 
+  mongoose.set("strictQuery", false);
+
 //db connection
 export const db = mongoose.connect(connectionString, options)
 .then(res => {
@@ -29,6 +35,6 @@ export const db = mongoose.connect(connectionString, options)
     }
     
 }).catch(err => {
-    console.log(err)
+    console.log(err, "errorMe")
 })
 
